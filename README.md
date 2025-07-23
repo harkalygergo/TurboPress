@@ -1,6 +1,6 @@
 # TurboPress
 
-TurboPress is a multi-langual and multisite compatible WordPress plugin that provides a set of tools and features to enhance the functionality of WordPress sites. It's free and always will be.
+Multilingual and multisite compatible WordPress plugin that provides a set of tools and features to enhance the functionality of any website. Make it better, faster and safer. It's free and always will be.
 
 ---
 

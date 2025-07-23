@@ -5,7 +5,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
 }
 
-$option_name = 'wp-turbo_option';
+$option_name = 'turbo_press_option';
 
 delete_option( $option_name );
 

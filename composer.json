@@ -1,0 +1,18 @@
+{
+    "name": "harkalygergo/turbopress",
+    "description": "Multilingual and multisite compatible plugin to make WordPress better, faster, safer. Feel free to use.",
+    "type": "wordpress-plugin",
+    "license": "GPL v3",
+    "autoload": {
+        "psr-4": {
+            "TurboPress\\": ["classes/"]
+        }
+    },
+    "authors": [
+        {
+            "name": "Harkály Gergő",
+            "email": "git@harkalygergo.hu"
+        }
+    ],
+    "require": {}
+}
