@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== TurboPress ===
 Contributors: harkalygergo
 Donate link: https://buymeacoffee.com/harkalygergo
 Requires at least: 5.2
