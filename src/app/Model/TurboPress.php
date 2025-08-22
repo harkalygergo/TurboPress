@@ -71,6 +71,8 @@ class TurboPress
     public function setHeadHTML(string $headHTML): TurboPress
     {
         $this->headHTML = $headHTML;
+
+        return $this;
     }
 
     public function getHeadCSS(): string

@@ -1,0 +1,119 @@
+<style>
+    .form-table th {
+        width:300px;
+        font-weight: normal;
+    }
+</style><form method="post" novalidate="novalidate">
+    <h2 class="title">General</h2>
+    <table class="form-table" role="presentation">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="email_from">Email from name is blog name and admin email</label></th>
+            <td>
+                <select required="required" name="email_from" id="email_from">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 class="title">Frontend</h2>
+    <table class="form-table" role="presentation">
+        <tbody>
+            <tr>
+                <th scope="row"><label for="html_cache">HTML cache</label></th>
+                <td>
+                    <select required="required" name="html_cache" id="html_cache">
+                        <option value="1">yes</option>
+                        <option value="0">no</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="title">Admin</h2>
+    <table class="form-table" role="presentation">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="login_screen_cover_image">Login screen cover image</label></th>
+            <td>
+                <select required="required" name="login_screen_cover_image" id="login_screen_cover_image">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="posts_blocks_link">Blokk link bejegyzésekben</label></th>
+            <td>
+                <select required="required" name="posts_blocks_link" id="posts_blocks_link">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="href_link">Hivatkozások link bejegyzésekben</label></th>
+            <td>
+                <select required="required" name="href_link" id="href_link">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="all_options_link">Összes beállítás link</label></th>
+            <td>
+                <select required="required" name="all_options_link" id="all_options_link">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Security</h3>
+    <table class="form-table" role="presentation">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="remove_generator_meta_tag">Remove generator meta tag</label></th>
+            <td>
+                <select required="required" name="remove_generator_meta_tag" id="remove_generator_meta_tag">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="login_screen_captcha">Login screen captcha</label></th>
+            <td>
+                <select required="required" name="login_screen_captcha" id="login_screen_captcha">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>WooCommerce</h3>
+    <table class="form-table" role="presentation">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="woo_lightbox">Enable Woo product lightbox</label></th>
+            <td>
+                <select required="required" name="woo_lightbox" id="woo_lightbox">
+                    <option value="1">yes</option>
+                    <option value="0">no</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Módosítások mentése"></p>
+</form>

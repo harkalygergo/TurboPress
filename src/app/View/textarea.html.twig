@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block tabContent %}
+    <form method="post">
+        <h2><label for="{{ tab }}">{{ title|raw }}</label></h2>
+        <textarea name="{{ tab }}" id="{{ tab }}" rows="30" style="width:100%;">{{ content }}</textarea>
+        <p class="submit">
+            <input type="submit" name="submit" id="submit" class="button button-large button-primary" value="Mentés">
+        </p>
+    </form>
+{% endblock %}

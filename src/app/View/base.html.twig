@@ -1,0 +1,19 @@
+<div class="wrap">
+    <h1>{{ pluginName }}</h1>
+    <nav class="nav-tab-wrapper">
+        {% for tabKey, tabValue in tabs %}
+            <a href="?page={{ pluginSlug }}&tab={{ tabKey }}" class="nav-tab
+             {% if tabKey == tab %}
+                nav-tab-active
+            {% endif %}
+                ">{{ tabValue }}</a>
+        {% endfor %}
+    </nav>
+    <div class="tab-content">
+
+        {% block tabContent %}
+            {{ tabContent|raw }}
+        {% endblock %}
+
+    </div>
+</div>

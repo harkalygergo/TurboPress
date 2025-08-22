@@ -1,0 +1,20 @@
+<h2>Developer Tools</h2>
+<table class="wc_status_table widefat">
+    <tbody class="tools">
+        <tr>
+            <th>
+                <strong class="name">Truncate Posts and Meta</strong>
+                <p class="description">
+                    Click the button below to truncate all posts, pages, and their metadata.
+                </p>
+            </th>
+            <td class="run-tool">
+                <form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">
+                    <?php echo wp_nonce_field('truncate_posts', '_wpnonce', true, false); ?>
+                    <input type="hidden" name="action" value="truncate_posts">
+                    <button type="submit" class="button button-large">Truncate Posts and Meta</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>

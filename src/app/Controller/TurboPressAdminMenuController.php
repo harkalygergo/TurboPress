@@ -4,6 +4,8 @@ namespace TurboPress\Controller;
 
 class TurboPressAdminMenuController extends TurboPressController
 {
+    private array $pluginTabs;
+
     public function __construct()
     {
         parent::__construct();
@@ -11,108 +13,83 @@ class TurboPressAdminMenuController extends TurboPressController
 
     public function init()
     {
-        // Add admin menu item
-        add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
-    }
-
-    public function add_admin_menu()
-    {
-        add_menu_page(
-            $this->pluginName,
-            $this->pluginName,
-            'manage_options',
-            $this->pluginSlug,
-            [ $this, 'options_page' ],
-            'dashicons-superhero',
-            0
-        );
-    }
-
-    public function options_page()
-    {
-        $availableTabs = [
-            'head-html' => 'Head HTML',
-            'head-css' => 'Head CSS',
-            'head-js' => 'Head JS',
-            'footer-html' => 'Footer HTML',
-            'footer-js' => 'Footer JS',
-            'settings' => 'Settings',
-            'developer-tools' => 'Developer Tools',
+        $this->pluginTabs = [
+            null => 'Info',
+            'head_html' => 'Head HTML',
+            'head_css' => 'Head CSS',
+            'head_js' => 'Head JS',
+            'footer_html' => 'Footer HTML',
+            'footer_js' => 'Footer JS',
+            'settings' => __( 'Settings'),
+            'developer_tools' => 'Developer Tools',
             'log' => 'Napló',
             'phpinfo' => 'PHP Info',
         ];
 
+        add_action( 'admin_menu', [ $this, 'addAdminMenu' ] );
+    }
 
+    public function addAdminMenu()
+    {
+        add_submenu_page(
+            'options-general.php',
+            $this->pluginName,
+            $this->pluginName,
+            'manage_options',
+            $this->pluginSlug,
+            [ $this, 'showTabs' ],
+        );
+    }
+
+    public function showTabs()
+    {
         $tab = $_GET['tab'] ?? null;
-        ?>
+        $twig = (new \TurboPress\Model\Twig)->getEnvironment();
 
-        <div class="wrap">
-            <h1><?php echo $this->settings->getPluginName(); ?></h1>
-            <nav class="nav-tab-wrapper">
-                <a href="?page=<?php echo $this->pluginSlug; ?>" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Info</a>
-
-                <?php foreach ($availableTabs as $tabKey => $tabTitle)
-                {
-                    echo sprintf('<a href="?page=%s&tab=%s" class="nav-tab %s">%s</a>',
-                        $this->pluginSlug,
-                        $tabKey,
-                        $tab===$tabKey ? 'nav-tab-active' : '',
-                        $tabTitle
-                    );
+        $twigTemplate = 'content.html.twig';
+        switch ($tab) {
+            case 'head_html':
+            case 'head_css':
+            case 'head_js':
+            case 'footer_html':
+            case 'footer_js':
+                if (!empty($_POST) && isset($_POST) && is_array($_POST) && count($_POST) && isset($_POST[$tab])) {
+                    update_option($this->settings->getPluginPrefix().$tab, $_POST[$tab]);
                 }
-                ?>
-            </nav>
-            <div class="tab-content">
+                $twigTemplate = 'textarea.html.twig';
+                $content = get_option($this->settings->getPluginPrefix().$tab);
+                break;
+            case 'phpinfo':
+                ob_start();
+                phpinfo();
+                $content = explode('</body>', explode('<body>', trim (ob_get_clean ()))['1'])['0'];
+                $content .= '<style>table, th, td { border: 1px solid gray;}</style>';
+                ob_flush();
+                ob_end_clean();
+                break;
+            case 'settings':
+                $content = file_get_contents(__DIR__.'/../View/parts/settings_form.html');
+                break;
+            case 'log':
+                $content = '...';
+                break;
+            case 'developer_tools':
+                $content = file_get_contents(__DIR__.'/../View/parts/developer-tools.html.twig');
+                break;
+            default:
+                $languageCode = get_option('WPLANG') ?? 'en_GB';
+                $content = file_get_contents(__DIR__.'/../../assets/documentation/'.$languageCode.'.html');
+                break;
+        }
 
-                <?php
-                switch ($tab) {
-                    case 'head-html':
-                        break;
-                    case 'head-css':
-                        break;
-                    case 'head-js':
-                        break;
-                    case 'footer-html':
-                        break;
-                    case 'footer-js':
-                        break;
-                    case 'phpinfo':
-
-                        ob_start();
-                        phpinfo();
-                        echo explode('</body>', explode('<body>', trim (ob_get_clean ()))['1'])['0'];
-                        echo '<style>table, th, td { border: 1px solid gray;}</style>';
-                        ob_flush();
-                        ob_end_clean();
-                        break;
-                    case 'settings':
-                        include_once(__DIR__.'/../View/settings_form.html');
-                        break;
-                    case 'log':
-                        break;
-                    case 'developer-tools':
-                        echo '<h2>Developer Tools</h2>';
-                        ?>
-                            <h1>Truncate Posts and Meta</h1>
-                            <p>Click the button below to truncate all posts, pages, and their metadata.</p>
-                            <form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">
-                                <?php echo wp_nonce_field('truncate_posts', '_wpnonce', true, false); ?>
-                                <input type="hidden" name="action" value="truncate_posts">
-                                <button type="submit" class="button button-primary">Truncate Posts and Meta</button>
-                            </form>
-                        <?php
-                        break;
-
-                    default:
-                        $languageCode = get_option('WPLANG')!=='' ? get_option('WPLANG') : 'en_GB';
-                        include_once (__DIR__.'/../../assets/documentation/'.$languageCode.'.html');
-                        break;
-                }
-                ?>
-
-            </div>
-        </div>
-
-        <?php
+        echo $twig->render($twigTemplate, [
+                'pluginName' => $this->settings->getPluginName(),
+                'pluginSlug' => $this->settings->getPluginSlug(),
+                'tabs' => $this->pluginTabs,
+                'tab' => $tab,
+                'title' => $this->pluginTabs[$tab],
+                'content' => $content,
+            ]
+        );
     }
 }

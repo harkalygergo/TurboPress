@@ -5,8 +5,8 @@ Requires at least: 5.2
 Tested up to: 5.4
 Stable tag: 4.3
 Requires PHP: 8.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Multilingual and multisite compatible WordPress plugin that provides a set of tools and features to enhance the functionality of any website. Make it better, faster and safer. It's free and always will be.
 
