@@ -5,7 +5,7 @@
     "license": "GPL v3",
     "autoload": {
         "psr-4": {
-            "TurboPress\\": ["classes/"]
+            "TurboPress\\": ["src/app/"]
         }
     },
     "authors": [
@@ -14,5 +14,8 @@
             "email": "git@harkalygergo.hu"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.0",
+        "twig/twig": "^3.0"
+    }
 }

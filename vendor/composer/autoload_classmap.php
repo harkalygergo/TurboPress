@@ -7,4 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'TurboPress\\Controller\\LoginBackgroundController' => $baseDir . '/src/app/Controller/LoginBackgroundController.php',
+    'TurboPress\\Controller\\LoginCaptchaController' => $baseDir . '/src/app/Controller/LoginCaptchaController.php',
+    'TurboPress\\Controller\\TurboPressAdminMenuController' => $baseDir . '/src/app/Controller/TurboPressAdminMenuController.php',
+    'TurboPress\\Controller\\TurboPressController' => $baseDir . '/src/app/Controller/TurboPressController.php',
+    'TurboPress\\Controller\\WooCommerceController' => $baseDir . '/src/app/Controller/WooCommerceController.php',
+    'TurboPress\\Model\\LoginCaptcha' => $baseDir . '/src/app/Model/LoginCaptcha.php',
+    'TurboPress\\Model\\TurboPress' => $baseDir . '/src/app/Model/TurboPress.php',
 );

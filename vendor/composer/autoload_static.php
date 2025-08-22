@@ -16,12 +16,19 @@ class ComposerStaticInit4045092f4b6c43c1519a801102bececc
     public static $prefixDirsPsr4 = array (
         'TurboPress\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/classes',
+            0 => __DIR__ . '/../..' . '/src/app',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'TurboPress\\Controller\\LoginBackgroundController' => __DIR__ . '/../..' . '/src/app/Controller/LoginBackgroundController.php',
+        'TurboPress\\Controller\\LoginCaptchaController' => __DIR__ . '/../..' . '/src/app/Controller/LoginCaptchaController.php',
+        'TurboPress\\Controller\\TurboPressAdminMenuController' => __DIR__ . '/../..' . '/src/app/Controller/TurboPressAdminMenuController.php',
+        'TurboPress\\Controller\\TurboPressController' => __DIR__ . '/../..' . '/src/app/Controller/TurboPressController.php',
+        'TurboPress\\Controller\\WooCommerceController' => __DIR__ . '/../..' . '/src/app/Controller/WooCommerceController.php',
+        'TurboPress\\Model\\LoginCaptcha' => __DIR__ . '/../..' . '/src/app/Model/LoginCaptcha.php',
+        'TurboPress\\Model\\TurboPress' => __DIR__ . '/../..' . '/src/app/Model/TurboPress.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

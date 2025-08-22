@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'TurboPress\\' => array($baseDir . '/classes'),
+    'TurboPress\\' => array($baseDir . '/src/app'),
 );
