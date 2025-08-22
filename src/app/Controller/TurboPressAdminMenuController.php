@@ -36,6 +36,10 @@ class TurboPressAdminMenuController extends TurboPressController
             'head-js' => 'Head JS',
             'footer-html' => 'Footer HTML',
             'footer-js' => 'Footer JS',
+            'settings' => 'Settings',
+            'developer-tools' => 'Developer Tools',
+            'log' => 'Napló',
+            'phpinfo' => 'PHP Info',
         ];
 
 
@@ -45,7 +49,7 @@ class TurboPressAdminMenuController extends TurboPressController
         <div class="wrap">
             <h1><?php echo $this->settings->getPluginName(); ?></h1>
             <nav class="nav-tab-wrapper">
-                <a href="?page=<?php echo $this->pluginSlug; ?>" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Default</a>
+                <a href="?page=<?php echo $this->pluginSlug; ?>" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Info</a>
 
                 <?php foreach ($availableTabs as $tabKey => $tabTitle)
                 {
@@ -57,11 +61,6 @@ class TurboPressAdminMenuController extends TurboPressController
                     );
                 }
                 ?>
-
-                <a href="?page=<?php echo $this->pluginSlug; ?>&tab=settings" class="nav-tab <?php if($tab==='settings'):?>nav-tab-active<?php endif; ?>">TurboPress Settings</a>
-                <a href="?page=<?php echo $this->pluginSlug; ?>&tab=tools" class="nav-tab <?php if($tab==='tools'):?>nav-tab-active<?php endif; ?>">Developer Tools</a>
-                <a href="?page=<?php echo $this->pluginSlug; ?>&tab=log" class="nav-tab <?php if($tab==='log'):?>nav-tab-active<?php endif; ?>">Napló</a>
-                <a href="?page=<?php echo $this->pluginSlug; ?>&tab=credit" class="nav-tab <?php if($tab==='credit'):?>nav-tab-active<?php endif; ?>">Credit</a>
             </nav>
             <div class="tab-content">
 
@@ -73,21 +72,25 @@ class TurboPressAdminMenuController extends TurboPressController
                         break;
                     case 'head-js':
                         break;
+                    case 'footer-html':
+                        break;
                     case 'footer-js':
+                        break;
+                    case 'phpinfo':
+
+                        ob_start();
+                        phpinfo();
+                        echo explode('</body>', explode('<body>', trim (ob_get_clean ()))['1'])['0'];
+                        echo '<style>table, th, td { border: 1px solid gray;}</style>';
+                        ob_flush();
+                        ob_end_clean();
                         break;
                     case 'settings':
                         include_once(__DIR__.'/../View/settings_form.html');
                         break;
                     case 'log':
                         break;
-                    case 'credit':
-                        echo '<p>This forever free WordPress plugin made by Gergő Harkály full-stack web developer freelancer. If you like it, please</p>
-                            <ol>
-                                <li>review it on official WordPress plugin page</li>
-                                <li>help me with a cup of coffee: <a href="https://buymeacoffee.com/harkalygergo" target="_blank" rel="nofollow">buymeacoffee.com/harkalygergo</a></li>
-                                </ol><p>Thank you very much for your review and donation!</p>';
-                        break;
-                    case 'tools':
+                    case 'developer-tools':
                         echo '<h2>Developer Tools</h2>';
                         ?>
                             <h1>Truncate Posts and Meta</h1>
@@ -101,7 +104,8 @@ class TurboPressAdminMenuController extends TurboPressController
                         break;
 
                     default:
-                        echo '...';
+                        $languageCode = get_option('WPLANG')!=='' ? get_option('WPLANG') : 'en_GB';
+                        include_once (__DIR__.'/../../assets/documentation/'.$languageCode.'.html');
                         break;
                 }
                 ?>
