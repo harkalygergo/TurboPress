@@ -12,7 +12,7 @@
  * Plugin Name:       TurboPress
  * Plugin URI:        https://wordpress.org/plugins/turbopress/
  * Description:       Multilingual and multisite compatible WordPress plugin that provides a set of tools and features to enhance the functionality of any website. Make it better, faster and safer. It's free and always will be.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Requires at least: 5.2
  * Requires PHP:      8.0
  * Author:            Harkály Gergő
